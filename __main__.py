@@ -1,0 +1,3 @@
+import lintumbra
+
+lintumbra.main()

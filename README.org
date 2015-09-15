@@ -1,0 +1,53 @@
+#+title: lintumbra README
+#+options: num:nil
+
+This is the Antumbra Glow client for Linux (/ BSD / Unix-like / anything with a
+POSIX interface that doesn't totally suck).
+
+* Requirements
+
+** Base requirements
+
+- Python 3
+- libantumbra (https://github.com/TeamAntumbra/libantumbra) installed to a
+  standard location (~libantumbra.so~ in ~/lib~, ~/usr/lib~, ~/usr/local/lib~,
+  etc)
+- libusb 1.x.x (for libantumbra). *Not* libusb 0.x.x or libusb-compat!
+  Seriously, it won't work.
+
+** Requirements for screen mirroring
+
+- X window server (or X-compatible, like XWayland)
+- ffmpeg (specifically, the ~x11grab~ device for screen capture)
+
+* Installation
+
+Simply follow the standard ~distutils~ process. You can install system-wide with
+~python setup.py install~, or to your home directory with ~python setup.py
+install --user~. However, the recommended approach is to create and/or install a
+distro package, so you can easily uninstall or upgrade it later.
+
+~python setup.py bdist~ will create a distribution tarball, which can be
+converted to a distro package by distro-specific means, or extracted directly
+into ~/~ (not recommended).
+
+~lintumbra~ has no binary components, so builds are non-architecture-specific.
+
+* Running
+
+: $ lintumbra
+
+Or direct execution via Python:
+
+: $ python3 -m lintumbra
+
+* The most important part
+
+This is how you perform reasonably efficient screen color captures using
+~ffmpeg~:
+
+: $ ffmpeg -nostdin -loglevel quiet -f x11grab -framerate 4 \
+:   -video_size 1920x1080 -i :0.0+0,0 -f rawvideo -pix_fmt rgb24 \
+:   -vf scale=1:1 - | xxd -p -c 6
+
+Adjust sizes and season to taste. You're welcome.
