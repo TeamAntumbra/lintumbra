@@ -31,15 +31,15 @@ distro package, so you can easily uninstall or upgrade it later.
 converted to a distro package by distro-specific means, or extracted directly
 into ~/~ (not recommended).
 
-~lintumbra~ has no binary components, so builds are non-architecture-specific.
+There are no binary components, so builds are non-architecture-specific.
 
 * Running
 
-: $ lintumbra
+: $ antumbra
 
 Or direct execution via Python:
 
-: $ python3 -m lintumbra
+: $ python3 -m antumbra
 
 * The most important part
 
